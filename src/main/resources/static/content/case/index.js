@@ -167,6 +167,9 @@ $(function(){
 
             update(obj);
 
+        }else if(layEvent == 'printCase'){
+            var url = '../case/printCase.html?id=' + data.id;
+            window.open(url);
         }
     });
 

@@ -36,7 +36,7 @@ var save = function(){
     data.content = $('#content').val();
     data.sicknessId = $('#sickness-select').val();
     data.recipel = $('#recipel').val();
-
+    data.advice = $('#advice').val();
 
     $.ajax({
        url: SERVER_ROUTER.PATH_CASE_SAVE_FOR_DOCTOR,

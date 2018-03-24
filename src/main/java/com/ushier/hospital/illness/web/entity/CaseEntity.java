@@ -15,7 +15,16 @@ public class CaseEntity {
     private Integer sicknessId;
     private String recipel;
     private String advice;
+    private String reason;
 
+
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
+    }
 
     public String getAdvice() {
         return advice;

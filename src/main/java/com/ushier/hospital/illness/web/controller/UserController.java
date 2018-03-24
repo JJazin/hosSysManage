@@ -2,8 +2,10 @@ package com.ushier.hospital.illness.web.controller;
 
 import com.ushier.hospital.illness.web.bean.LayUITableBean;
 import com.ushier.hospital.illness.web.bean.ResponseMessageBean;
+import com.ushier.hospital.illness.web.entity.CaseEntity;
 import com.ushier.hospital.illness.web.entity.UserEntity;
 import com.ushier.hospital.illness.web.global.ServerCode;
+import com.ushier.hospital.illness.web.service.CaseService;
 import com.ushier.hospital.illness.web.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +21,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private CaseService caseService;
 
 
     @RequestMapping(value = "/pageQuery", method = RequestMethod.GET)
@@ -79,5 +84,6 @@ public class UserController {
         bean.setMsg(rows > 0 ? ServerCode.MSG_DELETE_SUCCESS : ServerCode.MSG_DELETE_FAIL);
         return bean;
     }
+
 
 }

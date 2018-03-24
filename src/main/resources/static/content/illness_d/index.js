@@ -86,7 +86,6 @@ $(function () {
 
         if (layEvent === 'del') { //删除
             layer.confirm('真的删除该科室么', {offset: 't'}, function (index) {
-
                 //向服务端发送删除指令
                 del(obj, index);
             });

@@ -48,6 +48,7 @@ var SERVER_ROUTER = {
     PATH_USER_SAVE: rootPath + '/user/save',
     PATH_USER_UPDATE: rootPath + '/user/update',
     PATH_USER_DELETE: rootPath + '/user/delete',
+    PATH_USER_GET: rootPath + '/user/get',
 
     PATH_QUERY_PAGE_ROLE: rootPath + '/role/pageQuery',
     PATH_ROLE_SAVE: rootPath + '/role/save',
@@ -107,6 +108,7 @@ var SERVER_ROUTER = {
     PATH_CASE_SAVE_FOR_DOCTOR: rootPath + '/case/saveForDoctor',
     PATH_CASE_UPDATE: rootPath + '/case/update',
     PATH_CASE_DELETE: rootPath + '/case/delete',
+    PATH_CASE_GET: rootPath + '/case/get',
 
     // notice
     PATH_QUERY_PAGE_NOTICE: rootPath + '/notice/pageQuery',

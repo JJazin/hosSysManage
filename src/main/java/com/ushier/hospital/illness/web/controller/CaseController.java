@@ -3,17 +3,21 @@ package com.ushier.hospital.illness.web.controller;
 import com.ushier.hospital.illness.web.bean.LayUITableBean;
 import com.ushier.hospital.illness.web.bean.ResponseMessageBean;
 import com.ushier.hospital.illness.web.dto.CaseDTO;
+import com.ushier.hospital.illness.web.dto.CasePrintDto;
 import com.ushier.hospital.illness.web.dto.SeasonSicknessDTO;
 import com.ushier.hospital.illness.web.entity.CaseEntity;
+import com.ushier.hospital.illness.web.entity.HospitalEntity;
 import com.ushier.hospital.illness.web.entity.UserEntity;
 import com.ushier.hospital.illness.web.global.ServerCode;
 import com.ushier.hospital.illness.web.global.SessionKey;
 import com.ushier.hospital.illness.web.global.SicknessEnum;
 import com.ushier.hospital.illness.web.service.CaseService;
+import com.ushier.hospital.illness.web.service.HospitalService;
 import com.ushier.hospital.illness.web.service.UserService;
 import com.ushier.hospital.illness.web.util.DateUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -34,7 +38,8 @@ public class CaseController {
     private CaseService service;
     @Autowired
     private UserService userService;
-
+    @Autowired
+    private HospitalService hospitalService;
     /**
      * 季节患病提醒
      * @return
@@ -155,6 +160,32 @@ public class CaseController {
         int rows = this.service.delById(id);
         bean.setData(rows > 0 ? true : false);
         bean.setMsg(rows > 0 ? ServerCode.MSG_DELETE_SUCCESS : ServerCode.MSG_DELETE_FAIL);
+        return bean;
+    }
+
+    @RequestMapping(value = "/get", method = RequestMethod.GET)
+    public ResponseMessageBean<CasePrintDto> get(Integer id){
+        ResponseMessageBean<CasePrintDto> bean = new ResponseMessageBean<>(ServerCode.RETURN_OK);
+        try {
+            //找病历
+            CaseEntity caseEntity = service.queryById(id);
+            //找医生
+            UserEntity doctor = userService.queryById(caseEntity.getDid());
+            // 找医院
+            HospitalEntity hospital = hospitalService.queryById(caseEntity.getHosId());
+            //找病人
+            UserEntity patient = userService.queryById(caseEntity.getUid());
+            CasePrintDto casePrintDto = new CasePrintDto();
+            BeanUtils.copyProperties(caseEntity, casePrintDto);
+            casePrintDto.setdName(doctor.getRealName());
+            casePrintDto.sethName(hospital.getName());
+            casePrintDto.setsName(patient.getRealName());
+            casePrintDto.setSex(patient.getSex());
+            bean.setData(casePrintDto);
+        }catch (Exception e){
+            logger.error(e.toString());
+            bean.setStatus(ServerCode.RETURN_FAIL);
+        }
         return bean;
     }
 }
