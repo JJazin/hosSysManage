@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mapper.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ushier.hospital.illness.web.mapper.UserMapper">
+
+    <select id="pageQuery" resultType="com.ushier.hospital.illness.web.entity.UserEntity">
+
+        SELECT
+          a.id id, a.role_id role_id, a.name name, a.real_name real_name, a.idcard idcard, a.phone phone,
+          a.email email, a.qq_number qq_number, a.wx wx, a.create_time create_time, a.update_time update_time,
+          a.status status,a.hos_id hosId ,a.history history,a.age age,a.sex sex,a.hos_ids hosIds, b.name role_name
+        FROM _user a LEFT JOIN _role b
+        ON a.role_id = b.id
+        WHERE a.status = 0
+        <if test="roleId != null and roleId != 0">
+            AND a.role_id = #{roleId}
+        </if>
+        <if test="hosId != null and hosId !=0 ">
+            AND (a.hos_id = #{hosId} or a.hos_ids LIKE CONCAT('%','${hosId}','%'))
+        </if>
+        <if test="filterValue != null and filterValue != ''">
+            <bind name="selectKey" value="'%' + filterValue + '%'"/>
+            AND (a.name LIKE #{selectKey}
+            OR a.real_name LIKE #{selectKey}
+            OR a.idcard LIKE #{selectKey}
+            OR a.phone LIKE #{selectKey}
+            OR a.email LIKE #{selectKey}
+            OR a.qq_number LIKE #{selectKey}
+            OR a.wx LIKE #{selectKey})
+        </if>
+        ORDER BY a.role_id
+        LIMIT ${position}, ${length};
+    </select>
+
+    <select id="queryCount" resultType="java.lang.Integer">
+
+        SELECT COUNT(*) FROM _user WHERE status = 0
+        <if test="roleId != null">
+            AND role_id = #{roleId}
+        </if>
+        <if test="hosId != null">
+            AND hos_id = #{hosId}
+        </if>
+        <if test="filterValue != null">
+            <bind name="selectKey" value="'%' + filterValue + '%'"/>
+            AND name LIKE #{selectKey}
+            OR real_name LIKE #{selectKey}
+            OR idcard LIKE #{selectKey}
+            OR phone LIKE #{selectKey}
+            OR email LIKE #{selectKey}
+            OR qq_number LIKE #{selectKey}
+            OR wx LIKE #{selectKey}
+        </if>
+    </select>
+
+    <insert id="insert" parameterType="com.ushier.hospital.illness.web.entity.UserEntity">
+        INSERT INTO _user
+        (role_id, name, password, real_name, idcard, phone, email, qq_number, wx, create_time, update_time,history,age,sex)
+        VALUES
+        (
+            #{roleId},
+            #{name},
+            #{password},
+            #{realName, jdbcType=VARCHAR, typeHandler=com.ushier.hospital.illness.web.handler.StringNullValueHandler},
+            #{idcard, jdbcType=VARCHAR, typeHandler=com.ushier.hospital.illness.web.handler.StringNullValueHandler},
+            #{phone, jdbcType=VARCHAR, typeHandler=com.ushier.hospital.illness.web.handler.StringNullValueHandler},
+            #{email, jdbcType=VARCHAR, typeHandler=com.ushier.hospital.illness.web.handler.StringNullValueHandler},
+            #{qqNumber, jdbcType=VARCHAR, typeHandler=com.ushier.hospital.illness.web.handler.StringNullValueHandler},
+            #{wx, jdbcType=VARCHAR, typeHandler=com.ushier.hospital.illness.web.handler.StringNullValueHandler},
+            #{createTime},
+            #{updateTime},
+            #{history,jdbcType=VARCHAR, typeHandler=com.ushier.hospital.illness.web.handler.StringNullValueHandler},
+            #{age},
+             #{sex,jdbcType=VARCHAR, typeHandler=com.ushier.hospital.illness.web.handler.StringNullValueHandler}
+        );
+    </insert>
+
+    <update id="update" parameterType="com.ushier.hospital.illness.web.entity.UserEntity">
+        UPDATE _user
+        <set>
+            <if test="roleId != null">
+                role_id = #{roleId},
+            </if>
+            <if test="realName != null">
+                real_name = #{realName},
+            </if>
+            <if test="idcard != null">
+                idcard = #{idcard},
+            </if>
+            <if test="phone != null">
+                phone = #{phone},
+            </if>
+            <if test="email != null">
+                email = #{email},
+            </if>
+            <if test="qqNumber != null">
+                qq_number = #{qqNumber},
+            </if>
+            <if test="wx != null">
+                wx = #{wx},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="hosId != null">
+                hos_id = #{hosId},
+            </if>
+            <if test="history != null">
+                history = #{history},
+            </if>
+            <if test="age != null">
+                age = #{age},
+            </if>
+            <if test="sex != null">
+                sex = #{sex},
+            </if>
+            <if test="hosIds != null">
+                hos_ids = #{hosIds},
+            </if>
+        </set>
+        WHERE id = #{id};
+    </update>
+</mapper>

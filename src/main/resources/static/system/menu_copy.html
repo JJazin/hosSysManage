@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Menu</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" href="../assets/js/layui/css/layui.css">-->
+    <script type="text/javascript" src="../assets/js/jquery.js"></script>
+    <script type="text/javascript" src="../assets/js/base_config.js"></script>
+    <script type="text/javascript" src="../assets/js/layui/layui.all.js"></script>
+</head>
+
+<body>
+<div class="row">
+
+    <div class="col-sm-12">
+        <!-- BLANK PAGE-->
+        <div class="nest" id="Blank_PageClose">
+            <div class="title-alt">
+                <h6>
+                    Menu Page</h6>
+                <div class="titleClose">
+                    <a class="gone" href="#Blank_PageClose">
+                        <span class="entypo-cancel"></span>
+                    </a>
+                </div>
+                <div class="titleToggle">
+                    <a class="nav-toggle-alt" href="#Blank_Page_Content">
+                        <span class="entypo-up-open"></span>
+                    </a>
+                </div>
+
+            </div>
+
+            <div class="body-nest" id="Blank_Page_Content">
+                <table id="table" lay-filter="test"></table>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var table = layui.table;
+    table.render({
+        elem: '#table',
+        id: 'table',
+        even: false,// 隔行背景
+        skin: 'line',// 行边框风格
+        url: SERVER_ROUTER.PATH_QUERY_PAGE_MENU,
+        method: 'GET',
+        page: true,
+        limits: [10, 20, 50],
+        limit: 10,
+        loading: true,
+        width: '100%',
+        request: {
+            pageName: 'currentPage',
+            limitName: 'limit'
+        },
+        cols: [
+            [
+                {
+                    checkbox: false,
+                    sort: false
+                },
+                {
+                    field: 'id',
+                    title: 'ID',
+                    align: 'center'
+                },
+                {
+                    field: 'pTitle',
+                    title: '所属菜单',
+                    align: 'center',
+                    width: 100,
+                },
+                {
+                    field: 'title',
+                    title: '菜单名',
+                    width: 100,
+                    align: 'center'
+                },
+                {
+                    field: 'icon',
+                    title: '图标',
+                    templet: '<div><span class="{{d.icon}}"></span></div>',
+                    width: 100,
+                    align: 'center'
+                },
+                {
+                    field: 'weight',
+                    title: '权重',
+                    width: 100,
+                    align: 'center'
+                },
+                {
+                    field: 'updateTime',
+                    title: '最后更新时间',
+                    width: 200,
+                    align: 'center'
+                },
+                {
+                    title: 'OPT',
+                    fixed: 'right',
+                    align: 'center',
+                    width: 150,
+                    toolbar: '#toolBar'
+                }
+            ]
+        ]
+    });
+
+    //监听工具条
+    table.on('tool(test)', function(obj){ //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+        var data = obj.data; //获得当前行数据
+        var layEvent = obj.event; //获得 lay-event 对应的值
+        var tr = obj.tr; //获得当前行 tr 的DOM对象
+
+        if(layEvent === 'del'){ //删除
+            layer.confirm('真的删除行么', function(index){
+                obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+                layer.close(index);
+                //向服务端发送删除指令
+            });
+        } else if(layEvent === 'edit'){ //编辑
+            //do something
+            console.log(obj.data.title); //所在行的所有相关数据
+        }
+    });
+
+</script>
+
+<script type="text/html" id="toolBar">
+    <a class="layui-btn layui-btn-mini" lay-event="edit">修改</a>
+    <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">删除</a>
+</script>
+
+</body>
+

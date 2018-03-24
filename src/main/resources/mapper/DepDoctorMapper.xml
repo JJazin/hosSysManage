@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mapper.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ushier.hospital.illness.web.mapper.DepDoctorMapper">
+
+    <insert id="batchInsert">
+        INSERT INTO _dep_doctor (dep_id, doctor_id)
+        VALUES
+        <foreach collection="doctorIds" item="item" index="index" separator=",">
+            (#{depId}, #{item})
+        </foreach>
+    </insert>
+
+    <delete id="deleteByDepId" >
+        DELETE FROM _dep_doctor WHERE dep_id = #{depId}
+    </delete>
+
+</mapper>

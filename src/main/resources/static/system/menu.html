@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" href="../assets/css/loader-style.css">
+    <link rel="stylesheet" href="../assets/css/bootstrap.css">
+
+    <link rel="stylesheet" href="../assets/js/button/ladda/ladda.min.css">
+    <link rel="stylesheet" href="../assets/js/select2/css/select2.min.css">
+
+    <link href="../assets/css/icons-style.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="../assets/js/layui/css/layui.css">
+    <link rel="stylesheet" href="../assets/css/blank.css">
+    <script type="text/javascript" src="../assets/js/jquery.js"></script>
+    <script type="text/javascript" src="../assets/js/base_config.js"></script>
+
+
+</head>
+<body style="background: none">
+
+<div class="row">
+    <div class="col-sm-12">
+        <!-- BLANK PAGE-->
+        <div class="nest" id="menuListClose">
+            <div class="title-alt">
+                <h6>Menu List</h6>
+                <div class="titleClose">
+                    <a class="gone" href="#menuListClose">
+                        <span class="entypo-cancel"></span>
+                    </a>
+                </div>
+                <div class="titleToggle">
+                    <a class="nav-toggle-alt" href="#menuListContent">
+                        <span class="entypo-up-open"></span>
+                    </a>
+                </div>
+
+            </div>
+
+            <div class="body-nest" id="menuListContent">
+
+                <table id="table" lay-filter="test"></table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+
+    <div class="col-sm-12">
+        <!-- BLANK PAGE-->
+        <div class="nest" id="newMenuClose">
+            <div class="title-alt">
+                <h6>New Menu</h6>
+                <div class="titleClose">
+                    <a class="gone" href="#newMenuClose">
+                        <span class="entypo-cancel"></span>
+                    </a>
+                </div>
+                <div class="titleToggle">
+                    <a class="nav-toggle-alt" href="#newMenuContent">
+                        <span class="entypo-up-open"></span>
+                    </a>
+                </div>
+
+            </div>
+
+            <div class="body-nest" id="newMenuContent">
+                <div class="container">
+                    <div class="row clearfix">
+                        <div class="col-md-12 column">
+                            <form class="form-horizontal" role="form">
+                                <div class="form-group">
+                                    <label for="menu-select" class="col-sm-2 control-label">父菜单</label>
+                                    <div class="col-sm-10">
+                                        <select id="menu-select"></select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="title" class="col-sm-2 control-label">菜单名称</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="title" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="href" class="col-sm-2 control-label">访问路径</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="href" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="weight" class="col-sm-2 control-label">权重</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="weight" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="icon" class="col-sm-2 control-label">菜单图标</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="icon" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <button type="submit" onclick="return menuSave();" class="btn btn-default">添加</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!--<input type="text" placeholder="菜单名" />-->
+                <!--<input type="text" placeholder="路径" />-->
+                <!--<input type="text" placeholder="图标" />-->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../assets/js/layui/layui.all.js"></script>
+<script type="text/javascript" src="../assets/js/bootstrap.js"></script>
+<script type="text/javascript" src="../assets/js/select2/js/select2.min.js"></script>
+<script type="text/javascript" src="../assets/js/slidebars/slidebars.min.js"></script>
+<script type="text/javascript" src="../assets/js/app.js"></script>
+<script type="text/javascript" src="../assets/js/main.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+
+
+<script type="text/html" id="toolBar">
+    <a class="layui-btn layui-btn-mini" lay-event="edit"><i class="layui-icon">&#xe642;</i></a>
+    <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del"><i class="layui-icon">&#xe640;</i></a>
+</script>
+
+</body>

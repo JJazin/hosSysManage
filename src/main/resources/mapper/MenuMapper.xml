@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mapper.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ushier.hospital.illness.web.mapper.MenuMapper">
+
+    <select id="queryByIds" parameterType="java.lang.Integer" resultType="com.ushier.hospital.illness.web.entity.MenuEntity">
+        SELECT id, pid, title, href, icon FROM _menu WHERE status = 0
+        AND id IN
+        <foreach collection="ids" index="index" item="item" separator="," open="(" close=")">
+            #{item}
+        </foreach>
+        ORDER BY weight;
+    </select>
+
+    <select id="queryByRole" parameterType="java.lang.Integer" resultType="com.ushier.hospital.illness.web.entity.MenuEntity">
+        SELECT a.id id, pid, title, href, icon FROM _menu a
+        RIGHT JOIN _role_menu b ON a.id = b.menu_id
+        WHERE 1 = 1  AND b.role_id = #{roleId}
+        ORDER BY weight;
+    </select>
+
+    <select id="pageQuery" resultType="com.ushier.hospital.illness.web.entity.MenuEntity">
+        SELECT
+        a.id id, a.pid pid, a.title title, a.href href, a.icon icon, a.status status, a.weight weight,
+        a.create_time create_time, a.update_time update_time,
+        IFNULL(b.title, '无') p_title
+        FROM _menu a LEFT JOIN _menu b ON a.pid = b.id
+        WHERE 1 = 1
+        ORDER BY a.pid ASC
+        LIMIT ${position}, ${length};
+    </select>
+
+    <select id="queryCount" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM _menu WHERE 1 = 1
+    </select>
+
+    <insert id="insert" parameterType="com.ushier.hospital.illness.web.entity.MenuEntity">
+        INSERT INTO _menu
+        (pid, title, href, icon, status, weight, create_time, update_time)
+        VALUES
+        (
+        #{pid, jdbcType=INTEGER, typeHandler=com.ushier.hospital.illness.web.handler.IntegerNullValueHandler},
+        #{title, jdbcType=VARCHAR, typeHandler=com.ushier.hospital.illness.web.handler.StringNullValueHandler},
+        #{href, jdbcType=VARCHAR, typeHandler=com.ushier.hospital.illness.web.handler.StringNullValueHandler},
+        #{icon, jdbcType=VARCHAR, typeHandler=com.ushier.hospital.illness.web.handler.StringNullValueHandler},
+        #{status, jdbcType=INTEGER, typeHandler=com.ushier.hospital.illness.web.handler.IntegerNullValueHandler},
+        #{weight, jdbcType=INTEGER, typeHandler=com.ushier.hospital.illness.web.handler.IntegerNullValueHandler},
+        #{createTime},
+        #{updateTime}
+        );
+    </insert>
+
+    <update id="update" parameterType="com.ushier.hospital.illness.web.entity.MenuEntity">
+        UPDATE _menu
+        <set>
+            <if test="pid != null">
+                pid = #{pid},
+            </if>
+            <if test="title != null">
+                title = #{title},
+            </if>
+            <if test="href != null">
+                href = #{href},
+            </if>
+            <if test="icon != null">
+                icon = #{icon},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            <if test="weight != null">
+                weight = #{weight},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+        </set>
+        WHERE id = #{id};
+    </update>
+</mapper>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mapper.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ushier.hospital.illness.web.mapper.ResultMapper">
+
+
+
+    <insert id="insert" parameterType="com.ushier.hospital.illness.web.entity.ResultEntity">
+        INSERT INTO _result
+        (reg_id, content, create_time)
+        VALUES
+        (
+        #{regId},
+        #{content, jdbcType=VARCHAR, typeHandler=com.ushier.hospital.illness.web.handler.StringNullValueHandler},
+        NOW()
+        );
+    </insert>
+</mapper>

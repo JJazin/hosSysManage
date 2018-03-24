@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" href="../assets/css/loader-style.css">
+    <link rel="stylesheet" href="../assets/css/bootstrap.css">
+
+    <link rel="stylesheet" href="../assets/js/button/ladda/ladda.min.css">
+    <link rel="stylesheet" href="../assets/js/select2/css/select2.min.css">
+
+    <link href="../assets/css/icons-style.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="../assets/js/layui/css/layui.css">
+    <link rel="stylesheet" href="../assets/css/blank.css">
+    <script type="text/javascript" src="../assets/js/jquery.js"></script>
+    <script type="text/javascript" src="../assets/js/base_config.js"></script>
+
+
+</head>
+<body style="background: none">
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <!-- BLANK PAGE-->
+        <div class="nest" id="listClose">
+            <div class="title-alt">
+                <h6>用户管理</h6>
+                <div class="col-sm-10" style="margin-top: 6px;margin-left: 50px;">
+                    <select id="role-select1">
+                    </select>
+                    <input type="text" class="form-control" id="nameAndPhone" placeholder="请输入姓名或者电话号码" style="display: inline-block;width: 240px;"/>
+                    <button class="btn btn btn-primary" id="searchUser">
+                        查 询
+                    </button>
+                </div>
+                <!--<div class="col-sm-3"  style="margin-top: 10px;">-->
+                   <!---->
+                <!--</div>-->
+                <!--<div class="col-sm-1" style="margin-top: 10px;">-->
+                    <!---->
+                <!--</div>-->
+                <div class="titleClose">
+                    <a class="gone" href="#listClose">
+                        <span class="entypo-cancel"></span>
+                    </a>
+                </div>
+                <div class="titleToggle">
+                    <a class="nav-toggle-alt" href="#listContent">
+                        <span class="entypo-up-open"></span>
+                    </a>
+                </div>
+
+            </div>
+
+            <div class="body-nest" id="listContent">
+
+                <table id="table" lay-filter="test"></table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+
+    <div class="col-sm-12">
+        <!-- BLANK PAGE-->
+        <div class="nest" id="newUserClose">
+            <div class="title-alt">
+                <h6>New Menu</h6>
+                <div class="titleClose">
+                    <a class="gone" href="#newUserClose">
+                        <span class="entypo-cancel"></span>
+                    </a>
+                </div>
+                <div class="titleToggle">
+                    <a class="nav-toggle-alt" href="#newUserContent">
+                        <span class="entypo-up-open"></span>
+                    </a>
+                </div>
+
+            </div>
+
+            <div class="body-nest" id="newUserContent">
+                <div class="container">
+                    <div class="row clearfix">
+                        <div class="col-md-12 column">
+                            <form class="form-horizontal" role="form">
+                                <div class="form-group">
+                                    <label for="role-select" class="col-sm-2 control-label">角色组</label>
+                                    <div class="col-sm-10">
+                                        <select id="role-select"></select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="name" class="col-sm-2 control-label">登录账号</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="name" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password" class="col-sm-2 control-label">登录密码</label>
+                                    <div class="col-sm-10">
+                                        <input type="password" class="form-control" id="password" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="realName" class="col-sm-2 control-label">真实姓名</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="realName" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="idcard" class="col-sm-2 control-label">身份证号</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="idcard" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone" class="col-sm-2 control-label">手机号码</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="phone" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email" class="col-sm-2 control-label">邮箱</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="email" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="qqNumber" class="col-sm-2 control-label">QQ号码</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="qqNumber" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="wx" class="col-sm-2 control-label">微信号</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="wx" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <button type="submit" onclick="return userSave();" class="btn btn-default">添加</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!--<input type="text" placeholder="菜单名" />-->
+                <!--<input type="text" placeholder="路径" />-->
+                <!--<input type="text" placeholder="图标" />-->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script type="text/javascript" src="../assets/js/layui/layui.all.js"></script>
+<script type="text/javascript" src="../assets/js/bootstrap.js"></script>
+<script type="text/javascript" src="../assets/js/select2/js/select2.min.js"></script>
+<script type="text/javascript" src="../assets/js/slidebars/slidebars.min.js"></script>
+<script type="text/javascript" src="../assets/js/app.js"></script>
+<script type="text/javascript" src="../assets/js/main.js"></script>
+<script type="text/javascript" src="user.js"></script>
+
+
+<script type="text/html" id="toolBar">
+    <a class="layui-btn layui-btn-mini" lay-event="edit"><i class="layui-icon">&#xe642;</i></a>
+    <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del"><i class="layui-icon">&#xe640;</i></a>
+</script>
+
+</body>

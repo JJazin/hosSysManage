@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mapper.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ushier.hospital.illness.web.mapper.CaseMapper">
+
+    <select id="seasonSicknessList" resultType="com.ushier.hospital.illness.web.dto.SeasonSicknessDTO">
+
+        SELECT sickness_id, COUNT(sickness_id) AS number FROM _case WHERE
+        create_time &gt;= #{startTime} AND create_time &lt;= #{endTime}
+        GROUP BY sickness_id;
+
+    </select>
+
+    <select id="pageQuery" resultType="com.ushier.hospital.illness.web.dto.CaseDTO">
+
+        SELECT a.id, a.uid, a.did, a.hos_id, a.content, a.create_time,
+        b.phone AS d_phone, b.name AS d_name, c.phone AS u_phone, c.name AS u_name,
+        d.name AS hos_name, d.address, sickness_id, recipel,advice
+        FROM _case a LEFT JOIN _user b ON a.did = b.id
+        LEFT JOIN _user c ON a.uid = c.id
+        LEFT JOIN _hospital d ON a.hos_id = d.id
+        WHERE 1 = 1
+        <if test="uid != null">
+            AND a.uid = #{uid}
+        </if>
+        <if test="did != null">
+            AND a.did = #{did}
+        </if>
+        <if test="hosId != null">
+            AND a.hos_id = #{hosId}
+        </if>
+        <if test="filterValue != null and filterValue != ''">
+            <bind name="selectKey" value="'%' + filterValue + '%'"/>
+            AND (b.name LIKE #{selectKey}
+            OR b.real_name LIKE #{selectKey}
+            OR b.idcard LIKE #{selectKey}
+            OR b.phone LIKE #{selectKey}
+            OR b.email LIKE #{selectKey}
+            OR b.qq_number LIKE #{selectKey}
+            OR b.wx LIKE #{selectKey}
+            OR a.content LIKE #{selectKey})
+        </if>
+        LIMIT ${position}, ${length};
+    </select>
+
+    <select id="queryCount" resultType="java.lang.Integer">
+
+        SELECT COUNT(*) FROM _case WHERE 1 = 1
+        <if test="uid != null">
+            AND uid = #{uid}
+        </if>
+        <if test="did != null">
+            AND did = #{did}
+        </if>
+        <if test="hosId != null">
+            AND hos_id = #{hosId}
+        </if>
+    </select>
+
+    <insert id="insert" parameterType="com.ushier.hospital.illness.web.entity.CaseEntity">
+        INSERT INTO _case
+        (uid, did, hos_id, content, sickness_id, recipel,advice, create_time)
+        VALUES
+        (
+            #{uid},
+            #{did},
+            #{hosId},
+            #{content, jdbcType=VARCHAR, typeHandler=com.ushier.hospital.illness.web.handler.StringNullValueHandler},
+            #{sicknessId},
+            #{recipel, jdbcType=VARCHAR, typeHandler=com.ushier.hospital.illness.web.handler.StringNullValueHandler},
+            #{advice, jdbcType=VARCHAR, typeHandler=com.ushier.hospital.illness.web.handler.StringNullValueHandler},
+            #{createTime}
+        );
+    </insert>
+
+    <update id="update" parameterType="com.ushier.hospital.illness.web.entity.CaseEntity">
+        UPDATE _case
+        <set>
+            <if test="uid != null">
+                uid = #{uid},
+            </if>
+            <if test="did != null">
+                did = #{did},
+            </if>
+            <if test="hosId != null">
+                hos_id = #{hosId},
+            </if>
+            <if test="content != null">
+                content = #{content},
+            </if>
+            <if test="advice != null">
+                advice = #{advice},
+            </if>
+            <if test="recipel != null">
+                recipel = #{recipel},
+            </if>
+        </set>
+        WHERE id = #{id};
+    </update>
+</mapper>
