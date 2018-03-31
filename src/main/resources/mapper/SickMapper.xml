@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mapper.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ushier.hospital.illness.web.mapper.SickMapper">
+
+
+    <select id="pageQuery" resultType="com.ushier.hospital.illness.web.entity.SickEntity">
+        SELECT * FROM _sick
+        LIMIT ${position}, ${length};
+    </select>
+
+    <select id="queryCount" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM _sick WHERE 1 = 1
+    </select>
+
+    <insert id="insert" parameterType="com.ushier.hospital.illness.web.entity.SickEntity">
+        INSERT INTO _sick
+        (name)
+        VALUES
+        (
+        #{name, jdbcType=VARCHAR, typeHandler=com.ushier.hospital.illness.web.handler.StringNullValueHandler},
+        );
+    </insert>
+
+    <update id="update" parameterType="com.ushier.hospital.illness.web.entity.SickEntity">
+        UPDATE _sick
+        <set>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+        </set>
+        WHERE id = #{id};
+    </update>
+</mapper>

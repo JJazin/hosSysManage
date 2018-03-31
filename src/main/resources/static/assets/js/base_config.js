@@ -116,6 +116,11 @@ var SERVER_ROUTER = {
     PATH_NOTICE_UPDATE: rootPath + '/notice/update',
     PATH_NOTICE_DELETE: rootPath + '/notice/delete',
 
+    //sick
+    PATH_QUERY_PAGE_SICKNESS: rootPath + '/sickness/pageQuery',
+    PATH_SICKNESS_SAVE: rootPath + '/sickness/save',
+    PATH_SICKNESS_UPDATE: rootPath + '/sickness/update',
+    PATH_SICKNESS_DELETE: rootPath + '/sickness/delete',
 
     // result
     PATH_RESULT_SAVE: rootPath + "/result/save",
