@@ -19,7 +19,7 @@
         (name)
         VALUES
         (
-        #{name, jdbcType=VARCHAR, typeHandler=com.ushier.hospital.illness.web.handler.StringNullValueHandler},
+        #{name, jdbcType=VARCHAR, typeHandler=com.ushier.hospital.illness.web.handler.StringNullValueHandler}
         );
     </insert>
 

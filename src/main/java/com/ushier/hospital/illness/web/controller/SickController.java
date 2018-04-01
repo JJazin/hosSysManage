@@ -31,7 +31,6 @@ public class SickController {
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public ResponseMessageBean<Boolean> save(SickEntity entity) {
         ResponseMessageBean<Boolean> bean = new ResponseMessageBean<>(ServerCode.RETURN_OK);
-
         int rows = this.sickService.insert(entity);
         bean.setData(rows > 0 ? true : false);
         bean.setMsg(rows > 0 ? ServerCode.MSG_SAVE_SUCCESS : ServerCode.MSG_SAVE_FAIL);
@@ -49,7 +48,7 @@ public class SickController {
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    public ResponseMessageBean<Boolean> delById(Integer id) {
+    public ResponseMessageBean<Boolean> delete(Integer id) {
         ResponseMessageBean<Boolean> bean = new ResponseMessageBean<>(ServerCode.RETURN_OK);
 
         int rows = this.sickService.delById(id);

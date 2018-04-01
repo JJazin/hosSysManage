@@ -47,6 +47,13 @@ $(function(){
                     width: 650,
                     align: 'center',
                     edit: true
+                },
+                {
+                    title: 'OPT',
+                    fixed: 'right',
+                    align: 'center',
+                    width: 150,
+                    toolbar: '#toolBar'
                 }
                 // ,
                 // {
@@ -67,11 +74,11 @@ $(function(){
         var layEvent = obj.event; //获得 lay-event 对应的值
         var tr = obj.tr; //获得当前行 tr 的DOM对象
 
-        if(layEvent === 'del'){ //删除
+        if(layEvent === 'delete'){ //删除
             layer.confirm('真的删除该诊断结果么', {offset: 't'}, function(index){
 
                 //向服务端发送删除指令
-                del(obj, index);
+                delContent(obj, index);
             });
         } else if(layEvent === 'edit'){ //编辑
             //do something
@@ -99,15 +106,15 @@ $(function(){
 var save = function(){
 
     var data = {};
-
-    data.uid = '';
-    data.did = '';
-    data.hosId = '';
-    data.content = '';
+    data.name = $("#name").val();
+    // data.uid = '';
+    // data.did = '';
+    // data.hosId = '';
+    // data.content = '';
 
 
     $.ajax({
-        url: SERVER_ROUTER.PATH_CASE_SAVE,
+        url: SERVER_ROUTER.PATH_SICKNESS_SAVE,
         type: 'POST',
         dataType: 'JSON',
         data: data,
@@ -127,16 +134,44 @@ var save = function(){
 }
 
 
-var del = function(obj, index){
+var delContent = function(obj, index){
     var data = obj.data;
     $.ajax({
-        url: SERVER_ROUTER.PATH_SICKNESS_DELETE + '/' + data.id,
-        type: 'DELETE',
+        url: SERVER_ROUTER.PATH_SICKNESS_DELETE,
+        type: 'POST',
         dataType: 'JSON',
+        data: {
+            id: data.id
+        },
         success: function(data){
             if(data && data.status == SERVER_RESPONSE_CODE.OK){
                 obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
                 layer.close(index);
+            }
+            layer.msg(data.msg, {
+                offset: 't'
+            });
+        }
+    });
+}
+
+var update = function(obj){
+
+    var data = obj.data;
+
+    $.ajax({
+        url: SERVER_ROUTER.PATH_SICKNESS_UPDATE,
+        type: 'POST',
+        dataType: 'JSON',
+        data: {
+            id: data.id,
+            name: data.name
+        },
+        success: function(data){
+            if(data && data.status == SERVER_RESPONSE_CODE.OK){
+                if(data.data){
+                    obj.update(data);
+                }
             }
             layer.msg(data.msg, {
                 offset: 't'

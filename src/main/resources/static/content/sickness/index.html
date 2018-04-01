@@ -30,15 +30,15 @@
         <!-- BLANK PAGE-->
         <div class="nest" id="listClose">
             <div class="title-alt">
-                <h6>病例列表</h6>
-                <div class="col-sm-10" style="margin-top: 6px;margin-left: 50px;">
-                    <select id="hos-select">
-                    </select>
-                    <input type="text" class="form-control" id="nameAndPhone" placeholder="请输入医生姓名或者病人姓名或者电话号码或者诊断结果" style="display: inline-block;width: 376px;"/>
-                    <button class="btn btn btn-primary" id="searchCase">
-                        查 询
-                    </button>
-                </div>
+                <h6>诊断结果列表</h6>
+                <!--<div class="col-sm-10" style="margin-top: 6px;margin-left: 50px;">-->
+                    <!--<select id="hos-select">-->
+                    <!--</select>-->
+                    <!--<input type="text" class="form-control" id="nameAndPhone" placeholder="请输入医生姓名或者病人姓名或者电话号码或者诊断结果" style="display: inline-block;width: 376px;"/>-->
+                    <!--<button class="btn btn btn-primary" id="searchCase">-->
+                        <!--查 询-->
+                    <!--</button>-->
+                <!--</div>-->
 
                 <div class="titleClose">
                     <a class="gone" href="#listClose">
@@ -61,6 +61,48 @@
     </div>
 </div>
 
+<div class="row">
+
+    <div class="col-sm-12">
+        <!-- BLANK PAGE-->
+        <div class="nest" id="newUserClose">
+            <div class="title-alt">
+                <h6>添加诊断结果</h6>
+                <div class="titleClose">
+                    <a class="gone" href="#newUserClose">
+                        <span class="entypo-cancel"></span>
+                    </a>
+                </div>
+                <div class="titleToggle">
+                    <a class="nav-toggle-alt" href="#newUserContent">
+                        <span class="entypo-up-open"></span>
+                    </a>
+                </div>
+
+            </div>
+
+            <div class="body-nest" id="newUserContent">
+                <div class="container">
+                    <div class="row clearfix">
+                        <div class="col-md-12 column">
+                            <form class="form-horizontal" role="form">
+                                <div class="form-group">
+                                    <label for="name" class="col-sm-2 control-label">诊断结果名称</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control" id="name" style="display: inline-block;width: 350px;" /> <button type="submit" onclick="return save();" class="btn btn-default">添加</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!--<input type="text" placeholder="菜单名" />-->
+                <!--<input type="text" placeholder="路径" />-->
+                <!--<input type="text" placeholder="图标" />-->
+            </div>
+        </div>
+    </div>
+</div>
 
 <script type="text/javascript" src="../../assets/js/layui/layui.all.js"></script>
 <script type="text/javascript" src="../../assets/js/bootstrap.js"></script>
@@ -71,10 +113,12 @@
 <script type="text/javascript" src="index.js"></script>
 
 
-<script type="text/html" id="toolBar">
     <!--<a class="layui-btn layui-btn-mini" lay-event="edit"><i class="layui-icon">&#xe642;</i></a>-->
-    <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="printCase"><i class="layui-icon">打印</i></a>
+    <!--<a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="printCase"><i class="layui-icon">打印</i></a>-->
     <!--<a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del"><i class="layui-icon">&#xe640;</i></a>-->
+<script type="text/html" id="toolBar">
+        <a class="layui-btn layui-btn-mini" lay-event="edit"><i class="layui-icon">&#xe642;</i></a>
+        <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="delete"><i class="layui-icon">&#xe640;</i></a>
 </script>
 
 </body>

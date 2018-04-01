@@ -96,14 +96,14 @@ $(function(){
                 },
                 {
                     field: 'sicknessName',
-                    title: '确诊病症',
+                    title: '诊断结果',
                     width: 100,
                     align: 'center',
                     edit: false
                 },
                 {
                     field: 'content',
-                    title: '诊断结果',
+                    title: '确诊病症',
                     width: 350,
                     align: 'center',
                     edit: false
@@ -322,14 +322,14 @@ var search = function () {
                 },
                 {
                     field: 'sicknessName',
-                    title: '确诊病症',
+                    title: '诊断结果',
                     width: 100,
                     align: 'center',
                     edit: false
                 },
                 {
                     field: 'content',
-                    title: '诊断结果',
+                    title: '确诊病症',
                     width: 350,
                     align: 'center',
                     edit: false

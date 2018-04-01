@@ -23,7 +23,7 @@ public interface SickMapper {
 
     int update(SickEntity sickEntity);
 
-    @Delete("DELETE FROM _notice WHERE id = #{id}")
+    @Delete("DELETE FROM _sick WHERE id = #{id}")
     int delById(Integer id);
 
 }
