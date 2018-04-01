@@ -3,6 +3,7 @@ package com.green.hospital.illness.web.service;
 import com.green.hospital.illness.web.bean.LayUITableBean;
 import com.green.hospital.illness.web.bean.ResponseMessageBean;
 import com.green.hospital.illness.web.entity.UserEntity;
+import org.apache.ibatis.annotations.Select;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -23,4 +24,7 @@ public interface UserService {
     ResponseMessageBean<Boolean> loginOut(HttpServletRequest request);
 
     ResponseMessageBean<Boolean> reg(UserEntity userEntity, HttpServletRequest request);
+
+
+    UserEntity selectByName(String name);
 }

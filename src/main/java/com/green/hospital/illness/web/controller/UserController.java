@@ -57,7 +57,12 @@ public class UserController {
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public ResponseMessageBean<Boolean> save(UserEntity userEntity){
         ResponseMessageBean<Boolean> bean = new ResponseMessageBean<>(ServerCode.RETURN_OK);
-
+        UserEntity userDB=userService.selectByName(userEntity.getName());
+        if (userDB!=null){
+            bean.setData(false);
+            bean.setMsg(ServerCode.MSG_USER_REPEAT);
+            return bean;
+        }
         int rows = this.userService.insert(userEntity);
         bean.setData(rows > 0 ? true : false);
         bean.setMsg(rows > 0 ? ServerCode.MSG_SAVE_SUCCESS : ServerCode.MSG_SAVE_FAIL);

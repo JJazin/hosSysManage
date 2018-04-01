@@ -11,6 +11,7 @@ import com.green.hospital.illness.web.service.HospitalService;
 import com.green.hospital.illness.web.service.UserService;
 import com.green.hospital.illness.web.util.DateUtil;
 import com.green.hospital.illness.web.util.MD5Encoder;
+import com.green.hospital.illness.web.util.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -183,6 +184,14 @@ public class UserServiceImpl implements UserService {
             setErrBean(bean);
         }
         return bean;
+    }
+
+    @Override
+    public UserEntity selectByName(String name) {
+        if (StringUtil.isBlank(name)){
+            return null;
+        }
+        return userMapper.queryByName(name);
     }
 
     private void setErrBean(ResponseMessageBean<Boolean> bean) {
