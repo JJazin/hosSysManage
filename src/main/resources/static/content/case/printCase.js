@@ -14,7 +14,7 @@ $(function(){
             caseObj = data.data;
             $("#dName").text(caseObj.dName);
             $("#hName").text(caseObj.hName);
-            $("#time").text(caseObj.time);
+            $("#time").text(caseObj.createTime);
             $("#sName").text(caseObj.sName);
             $("#sex").text(caseObj.sex);
             $("#content").text(!caseObj.content?"":caseObj.content);
