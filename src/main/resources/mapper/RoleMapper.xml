@@ -2,14 +2,14 @@
 <!DOCTYPE mapper
         PUBLIC "-//mapper.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ushier.hospital.illness.web.mapper.RoleMapper">
+<mapper namespace="com.green.hospital.illness.web.mapper.RoleMapper">
 
-    <insert id="insert" parameterType="com.ushier.hospital.illness.web.entity.RoleEntity" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insert" parameterType="com.green.hospital.illness.web.entity.RoleEntity" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO _role (name, create_time, update_time)
         VALUES (#{name}, #{createTime}, #{updateTime});
     </insert>
 
-    <update id="update" parameterType="com.ushier.hospital.illness.web.entity.RoleEntity">
+    <update id="update" parameterType="com.green.hospital.illness.web.entity.RoleEntity">
         UPDATE _role
         <set>
             <if test="name != null">

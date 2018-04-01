@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mapper.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ushier.hospital.illness.web.mapper.CaseMapper">
+<mapper namespace="com.green.hospital.illness.web.mapper.CaseMapper">
 
-    <select id="seasonSicknessList" resultType="com.ushier.hospital.illness.web.dto.SeasonSicknessDTO">
+    <select id="seasonSicknessList" resultType="com.green.hospital.illness.web.dto.SeasonSicknessDTO">
 
         SELECT sickness_id, COUNT(sickness_id) AS number FROM _case WHERE
         create_time &gt;= #{startTime} AND create_time &lt;= #{endTime}
@@ -12,7 +12,7 @@
 
     </select>
 
-    <select id="pageQuery" resultType="com.ushier.hospital.illness.web.dto.CaseDTO">
+    <select id="pageQuery" resultType="com.green.hospital.illness.web.dto.CaseDTO">
 
         SELECT a.id, a.uid, a.did, a.hos_id, a.content, a.create_time,
         b.phone AS d_phone, b.name AS d_name, c.phone AS u_phone, c.name AS u_name,
@@ -58,7 +58,7 @@
         </if>
     </select>
 
-    <insert id="insert" parameterType="com.ushier.hospital.illness.web.entity.CaseEntity">
+    <insert id="insert" parameterType="com.green.hospital.illness.web.entity.CaseEntity">
         INSERT INTO _case
         (uid, did, hos_id, content, sickness_id, recipel,advice,reason, create_time)
         VALUES
@@ -66,16 +66,16 @@
             #{uid},
             #{did},
             #{hosId},
-            #{content, jdbcType=VARCHAR, typeHandler=com.ushier.hospital.illness.web.handler.StringNullValueHandler},
+            #{content, jdbcType=VARCHAR, typeHandler=com.green.hospital.illness.web.handler.StringNullValueHandler},
             #{sicknessId},
-            #{recipel, jdbcType=VARCHAR, typeHandler=com.ushier.hospital.illness.web.handler.StringNullValueHandler},
-            #{advice, jdbcType=VARCHAR, typeHandler=com.ushier.hospital.illness.web.handler.StringNullValueHandler},
-            #{reason, jdbcType=VARCHAR, typeHandler=com.ushier.hospital.illness.web.handler.StringNullValueHandler},
+            #{recipel, jdbcType=VARCHAR, typeHandler=com.green.hospital.illness.web.handler.StringNullValueHandler},
+            #{advice, jdbcType=VARCHAR, typeHandler=com.green.hospital.illness.web.handler.StringNullValueHandler},
+            #{reason, jdbcType=VARCHAR, typeHandler=com.green.hospital.illness.web.handler.StringNullValueHandler},
             #{createTime}
         );
     </insert>
 
-    <update id="update" parameterType="com.ushier.hospital.illness.web.entity.CaseEntity">
+    <update id="update" parameterType="com.green.hospital.illness.web.entity.CaseEntity">
         UPDATE _case
         <set>
             <if test="uid != null">

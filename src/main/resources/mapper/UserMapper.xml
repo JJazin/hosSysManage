@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mapper.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ushier.hospital.illness.web.mapper.UserMapper">
+<mapper namespace="com.green.hospital.illness.web.mapper.UserMapper">
 
-    <select id="pageQuery" resultType="com.ushier.hospital.illness.web.entity.UserEntity">
+    <select id="pageQuery" resultType="com.green.hospital.illness.web.entity.UserEntity">
 
         SELECT
           a.id id, a.role_id role_id, a.name name, a.real_name real_name, a.idcard idcard, a.phone phone,
@@ -54,7 +54,7 @@
         </if>
     </select>
 
-    <insert id="insert" parameterType="com.ushier.hospital.illness.web.entity.UserEntity">
+    <insert id="insert" parameterType="com.green.hospital.illness.web.entity.UserEntity">
         INSERT INTO _user
         (role_id, name, password, real_name, idcard, phone, email, qq_number, wx, create_time, update_time,history,age,sex)
         VALUES
@@ -62,21 +62,21 @@
             #{roleId},
             #{name},
             #{password},
-            #{realName, jdbcType=VARCHAR, typeHandler=com.ushier.hospital.illness.web.handler.StringNullValueHandler},
-            #{idcard, jdbcType=VARCHAR, typeHandler=com.ushier.hospital.illness.web.handler.StringNullValueHandler},
-            #{phone, jdbcType=VARCHAR, typeHandler=com.ushier.hospital.illness.web.handler.StringNullValueHandler},
-            #{email, jdbcType=VARCHAR, typeHandler=com.ushier.hospital.illness.web.handler.StringNullValueHandler},
-            #{qqNumber, jdbcType=VARCHAR, typeHandler=com.ushier.hospital.illness.web.handler.StringNullValueHandler},
-            #{wx, jdbcType=VARCHAR, typeHandler=com.ushier.hospital.illness.web.handler.StringNullValueHandler},
+            #{realName, jdbcType=VARCHAR, typeHandler=com.green.hospital.illness.web.handler.StringNullValueHandler},
+            #{idcard, jdbcType=VARCHAR, typeHandler=com.green.hospital.illness.web.handler.StringNullValueHandler},
+            #{phone, jdbcType=VARCHAR, typeHandler=com.green.hospital.illness.web.handler.StringNullValueHandler},
+            #{email, jdbcType=VARCHAR, typeHandler=com.green.hospital.illness.web.handler.StringNullValueHandler},
+            #{qqNumber, jdbcType=VARCHAR, typeHandler=com.green.hospital.illness.web.handler.StringNullValueHandler},
+            #{wx, jdbcType=VARCHAR, typeHandler=com.green.hospital.illness.web.handler.StringNullValueHandler},
             #{createTime},
             #{updateTime},
-            #{history,jdbcType=VARCHAR, typeHandler=com.ushier.hospital.illness.web.handler.StringNullValueHandler},
+            #{history,jdbcType=VARCHAR, typeHandler=com.green.hospital.illness.web.handler.StringNullValueHandler},
             #{age},
-             #{sex,jdbcType=VARCHAR, typeHandler=com.ushier.hospital.illness.web.handler.StringNullValueHandler}
+             #{sex,jdbcType=VARCHAR, typeHandler=com.green.hospital.illness.web.handler.StringNullValueHandler}
         );
     </insert>
 
-    <update id="update" parameterType="com.ushier.hospital.illness.web.entity.UserEntity">
+    <update id="update" parameterType="com.green.hospital.illness.web.entity.UserEntity">
         UPDATE _user
         <set>
             <if test="roleId != null">

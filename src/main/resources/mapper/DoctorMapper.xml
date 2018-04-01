@@ -2,10 +2,10 @@
 <!DOCTYPE mapper
         PUBLIC "-//mapper.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ushier.hospital.illness.web.mapper.DoctorMapper">
+<mapper namespace="com.green.hospital.illness.web.mapper.DoctorMapper">
 
 
-    <select id="pageQuery" resultType="com.ushier.hospital.illness.web.entity.DoctorEntity">
+    <select id="pageQuery" resultType="com.green.hospital.illness.web.entity.DoctorEntity">
         SELECT
           *
         FROM _doctor
@@ -17,13 +17,13 @@
         SELECT COUNT(*) FROM _doctor WHERE hos_id = #{hosId}
     </select>
 
-    <insert id="insert" parameterType="com.ushier.hospital.illness.web.entity.DoctorEntity">
+    <insert id="insert" parameterType="com.green.hospital.illness.web.entity.DoctorEntity">
         INSERT INTO _doctor
         (hos_id, `name`, sex, tel, major, pic, `level`)
         VALUES
         (
         #{hosId},
-        #{name, jdbcType=VARCHAR, typeHandler=com.ushier.hospital.illness.web.handler.StringNullValueHandler},
+        #{name, jdbcType=VARCHAR, typeHandler=com.green.hospital.illness.web.handler.StringNullValueHandler},
         #{sex},
         #{tel},
         #{major},
@@ -32,7 +32,7 @@
         );
     </insert>
 
-    <update id="update" parameterType="com.ushier.hospital.illness.web.entity.DoctorEntity">
+    <update id="update" parameterType="com.green.hospital.illness.web.entity.DoctorEntity">
         UPDATE _doctor
         <set>
             <if test="name != null">

@@ -30,7 +30,7 @@ server:
   tomcat:
     uri-encoding: utf-8
 mybatis:
-  type-aliases-package: com.ushier.stu.hospital-registration.entity
+  type-aliases-package: com.green.stu.hospital-registration.entity
   configuration:
     map-underscore-to-camel-case: true
   mapper-locations: classpath:mapper/*.xml
