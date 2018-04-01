@@ -81,9 +81,9 @@ var SERVER_ROUTER = {
     PATH_HOSPITAL_QUERY_ALL: rootPath + '/hospital/queryAll',
 
     // department
-    PATH_QUERY_PAGE_DEPARTMENT: rootPath + '/department/pageQuery',
-    PATH_DEPARTMENT_SAVE: rootPath + '/department/save',
-    PATH_DEPARTMENT_UPDATE: rootPath + '/department',
+    // PATH_QUERY_PAGE_DEPARTMENT: rootPath + '/department/pageQuery',
+    // PATH_DEPARTMENT_SAVE: rootPath + '/department/save',
+    // PATH_DEPARTMENT_UPDATE: rootPath + '/department',
 
     // doctor
     PATH_QUERY_PAGE_DOCTOR: rootPath + '/doctor/pageQuery',
@@ -98,7 +98,7 @@ var SERVER_ROUTER = {
     PATH_ILLNESS_UPDATE: rootPath + '/illness',
 
     // registration
-    PATH_QUERY_REGISTRATION: rootPath + "/registration",
+    // PATH_QUERY_REGISTRATION: rootPath + "/registration",
 
     // case
     PATH_QUERY_SICKNESS: rootPath + '/case/sickness',
@@ -123,7 +123,7 @@ var SERVER_ROUTER = {
     PATH_SICKNESS_DELETE: rootPath + '/sickness/delete',
 
     // result
-    PATH_RESULT_SAVE: rootPath + "/result/save",
+    // PATH_RESULT_SAVE: rootPath + "/result/save",
 
 
     PATH_FILE_UPLOAD: rootPath + '/file/upload',
