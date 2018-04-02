@@ -19,6 +19,7 @@
         FROM _case a LEFT JOIN _user b ON a.did = b.id
         LEFT JOIN _user c ON a.uid = c.id
         LEFT JOIN _hospital d ON a.hos_id = d.id
+        Left JOIN _sick s ON  a.sickness_id = s.id
         WHERE 1 = 1
         <if test="uid != null">
             AND a.uid = #{uid}
@@ -43,9 +44,14 @@
             OR c.real_name LIKE #{selectKey}
             OR c.name LIKE #{selectKey}
             OR c.phone LIKE #{selectKey}
+            OR s.name LIKE #{selectKey}
             )
         </if>
         LIMIT ${position}, ${length};
+    </select>
+
+    <select id="queryBySickName" resultType="com.green.hospital.illness.web.dto.CaseDTO">
+
     </select>
 
     <select id="queryCount" resultType="java.lang.Integer">
