@@ -26,6 +26,7 @@ public class CaseServiceImpl implements CaseService {
     @Autowired
     private SickMapper sickMapper;
 
+
     @Override
     public LayUITableBean<CaseDTO> pageQuery(Integer hosId, Integer did, Integer uid, String filterValue, Integer position, Integer length) {
         LayUITableBean<CaseDTO> bean = new LayUITableBean<>();
