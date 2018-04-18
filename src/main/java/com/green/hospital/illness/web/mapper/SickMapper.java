@@ -29,4 +29,6 @@ public interface SickMapper {
 
     @Select("SELECT * FROM _sick")
     List<SickEntity> getAll();
+
+
 }

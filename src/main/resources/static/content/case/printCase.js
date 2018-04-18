@@ -4,27 +4,29 @@ $(function(){
 
     uid = getUrlParam('id');
     var caseObj;
+
     $.ajax({
         url: SERVER_ROUTER.PATH_CASE_GET,
         type: 'GET',
         dataType: 'JSON',
         data:{id:uid},
-        success: function(data){
-            console.log(data);
-            caseObj = data.data;
+        success: function(data1){
+
+
+            caseObj = data1.data;
             $("#dName").text(caseObj.dName);
             $("#hName").text(caseObj.hName);
             $("#time").text(caseObj.createTime);
             $("#sName").text(caseObj.sName);
             $("#sex").text(caseObj.sex);
-            $("#content").text(!caseObj.content?"":caseObj.content);
+            $("#content").text(!caseObj.reason?"":caseObj.reason);
             $("#advice").text(!caseObj.advice?"":caseObj.advice);
-            $("#reason").text(!caseObj.reason?"":caseObj.reason);
+
+            $("#reason").text(!caseObj.content?"":caseObj.content);
+
             $("#recipel").text(!caseObj.recipel?"":caseObj.recipel);
         }
     });
-
-
 
     $.ajax({
         url: SERVER_ROUTER.PATH_QUERY_SICKNESS,
@@ -32,14 +34,14 @@ $(function(){
         dataType: 'JSON',
         success: function(data){
             console.log(data);
-            var html = '';
-            for(var i=0; i<data.length; i++){
-                var obj = data[i];
-                html += '<option value = "' + obj.id + '">' + obj.desc + '</option>';
-            }
-            $('#sickness-select').html(html);
+            var list=data;
+
         }
     });
+
+
+
+
 
     $('#sickness-select').select2({
         width: '150px',

@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -75,5 +76,15 @@ public class SickServiceImpl implements SickService {
             logger.error(e.getMessage());
         }
         return 0;
+    }
+    @Override
+    public List<SickEntity> queryAll(){
+        try {
+            return this.mapper.getAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.error(e.getMessage());
+        }
+        return new ArrayList<SickEntity>();
     }
 }

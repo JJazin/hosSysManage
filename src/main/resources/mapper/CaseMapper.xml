@@ -14,7 +14,7 @@
 
     <select id="pageQuery" resultType="com.green.hospital.illness.web.dto.CaseDTO">
         SELECT a.id, a.uid, a.did, a.hos_id, a.content, a.create_time,
-        b.phone AS d_phone, b.name AS d_name, c.phone AS u_phone, c.real_name AS u_name,
+        b.phone AS d_phone, b.real_name AS d_name, c.phone AS u_phone, c.real_name AS u_name,
         d.name AS hos_name, d.address, sickness_id, recipel,advice,reason
         FROM _case a LEFT JOIN _user b ON a.did = b.id
         LEFT JOIN _user c ON a.uid = c.id

@@ -5,12 +5,14 @@ import com.green.hospital.illness.web.bean.ResponseMessageBean;
 import com.green.hospital.illness.web.dto.CasePrintDto;
 import com.green.hospital.illness.web.entity.CaseEntity;
 import com.green.hospital.illness.web.entity.HospitalEntity;
+import com.green.hospital.illness.web.entity.SickEntity;
 import com.green.hospital.illness.web.entity.UserEntity;
 import com.green.hospital.illness.web.global.ServerCode;
 import com.green.hospital.illness.web.global.SessionKey;
 import com.green.hospital.illness.web.global.SicknessEnum;
 import com.green.hospital.illness.web.service.CaseService;
 import com.green.hospital.illness.web.service.HospitalService;
+import com.green.hospital.illness.web.service.SickService;
 import com.green.hospital.illness.web.service.UserService;
 import com.green.hospital.illness.web.util.DateUtil;
 import com.green.hospital.illness.web.dto.CaseDTO;
@@ -39,6 +41,8 @@ public class CaseController {
     private UserService userService;
     @Autowired
     private HospitalService hospitalService;
+    @Autowired
+    private SickService sickService;
     /**
      * 季节患病提醒
      * @return
@@ -51,14 +55,8 @@ public class CaseController {
     }
 
     @RequestMapping(value = "/sickness", method = RequestMethod.GET)
-    public Object sicknessList(){
-        List<Map<String, Object>> list = new ArrayList<>();
-        for(SicknessEnum se : SicknessEnum.values()){
-            Map<String, Object> map = new HashMap<>(2);
-            map.put("id", se.getId());
-            map.put("desc", se.getDesc());
-            list.add(map);
-        }
+    public List<SickEntity> sicknessList(){
+        List<SickEntity> list = sickService.queryAll();
         return list;
     }
 
@@ -172,6 +170,9 @@ public class CaseController {
             UserEntity doctor = userService.queryById(caseEntity.getDid());
             // 找医院
             HospitalEntity hospital = hospitalService.queryById(caseEntity.getHosId());
+
+            List<SickEntity> sickList = sickService.queryAll();
+
             //找病人
             UserEntity patient = userService.queryById(caseEntity.getUid());
             CasePrintDto casePrintDto = new CasePrintDto();
@@ -180,6 +181,12 @@ public class CaseController {
             casePrintDto.sethName(hospital.getName());
             casePrintDto.setsName(patient.getRealName());
             casePrintDto.setSex(patient.getSex());
+            for (SickEntity sick:sickList){
+                if (sick.getId()==casePrintDto.getSicknessId()) {
+                    casePrintDto.setReason(sick.getName());
+                    break;
+                }
+            }
             bean.setData(casePrintDto);
         }catch (Exception e){
             logger.error(e.toString());

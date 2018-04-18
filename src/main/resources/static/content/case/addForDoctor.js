@@ -13,7 +13,7 @@ $(function(){
             var html = '';
             for(var i=0; i<data.length; i++){
                 var obj = data[i];
-                html += '<option value = "' + obj.id + '">' + obj.desc + '</option>';
+                html += '<option value = "' + obj.id + '">' + obj.name + '</option>';
             }
             $('#sickness-select').html(html);
         }
